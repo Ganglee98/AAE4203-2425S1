@@ -63,6 +63,18 @@ def least_squares_solution(satellite_positions, receiver_position, pseudoranges_
         print(f"Estimated Receiver Position: {receiver_position}")
         print(f"Estimated Receiver Clock Bias: {delta_p[3]}")
 
+        # Calculate the DOP matrix
+        D = np.linalg.inv(G.T @ G)
+
+        # Extract DOP value
+        PDOP = np.sqrt(D[0, 0] + D[1, 1] + D[2, 2])
+        TDOP = np.sqrt(D[3, 3])  # 只考虑时间的 DOP
+        GDOP = np.sqrt(D[0, 0] + D[1, 1] + D[2, 2] + D[3, 3])
+
+        print(f"PDOP: {PDOP}")
+        print(f"TDOP: {TDOP}")
+        print(f"GDOP: {GDOP}")
+
         if np.linalg.norm(delta_p[:3]) < 1e-4:
             break
     return receiver_position
