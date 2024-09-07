@@ -68,7 +68,7 @@ def least_squares_solution(satellite_positions, receiver_position, pseudoranges_
 
         # Extract DOP value
         PDOP = np.sqrt(D[0, 0] + D[1, 1] + D[2, 2])
-        TDOP = np.sqrt(D[3, 3])  # 只考虑时间的 DOP
+        TDOP = np.sqrt(D[3, 3])
         GDOP = np.sqrt(D[0, 0] + D[1, 1] + D[2, 2] + D[3, 3])
 
         print(f"PDOP: {PDOP}")
